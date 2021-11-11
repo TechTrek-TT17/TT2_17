@@ -47,7 +47,7 @@ def login():
         conn = connect_to_db()
         cur = conn.cursor()
 
-        user = cur.execute("Select user from db where username= ? and password= ?",
+        user = cur.execute("Select * from db where username= ? and password= ?",
                            data["username"], data["password"])
         conn.commit()
         success = True
@@ -73,33 +73,6 @@ def logout():
     """
     logout_user()
     return {'message': 'User logged out'}
-
-
-@app.route()
-def get_all_projects():
-    success = False
-    try:
-        conn = connect_to_db()
-        cur = conn.cursor()
-
-        cur.execute("SELECT * FROM project")
-        projects = cur.fetchall()
-        success = True
-    except Exception as e:
-        print(e)
-        conn.rollback()
-    finally:
-        conn.close()
-
-    if (success):
-        result = []
-        for aPropect in projects:
-            result.append({"id": aPropect[0], "user_id": aPropect[1],
-                          "name": aPropect[2], "description": aPropect[3], "budget": aPropect[4]})
-
-        return Response(json.dumps({"status": "success", "data": result}), mimetype="application/json", status=200)
-    else:
-        return Response(json.dumps({"status": "error"}), mimetype="application/json", status=500)
 
 
 if __name__ == '__main__':
