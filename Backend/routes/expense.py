@@ -1,5 +1,6 @@
 from flask import Flask, json, request, Response
-from db import connect_to_db
+from database import connect_to_db
+#from db import connect_to_db
 import datetime
 
 # Function to update expense

@@ -1,31 +1,32 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField
+from flask import Flask, json, request, Response
 from wtforms.validators import DataRequired, ValidationError
-from models import db
+from database import connect_to_db
 
 
 def user_exists(form, field):
     print("Checking if user exists", field.data)
-    username = field.data
-    for users in user:
-        if username
+    try:
+        conn = connect_to_db()
+        cur = conn.cursor()
 
-    if not user:
-        raise ValidationError("Email provided not found.")
+        cur.execute("Select user from db where username= ? and password= ?",
+                    data["username"], data["password"])
+        conn.commit()
+        success = True
+    except Exception as e:
+        print(e)
+        conn.rollback()
+    finally:
+        conn.close()
 
-
-def password_matches(form, field):
-    print("Checking if password matches")
-    password = field.data
-    username = form.data['username']
-
-    if not username:
-        raise ValidationError("No such user exists.")
-    if not user.check_password(password):
-        raise ValidationError("Password was incorrect.")
+    if (success):
+        return Response(json.dumps({"status": "success"}), mimetype="application/json", status=200)
+    else:
+        return Response(json.dumps({"status": "error"}), mimetype="application/json", status=500)
 
 
 class LoginForm(FlaskForm):
-    email = StringField('email', validators=[DataRequired(), user_exists])
-    password = StringField('password', validators=[
-                           DataRequired(), password_matches])
+    email = StringField('username', validators=[user_exists])
+    password = StringField('password')

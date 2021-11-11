@@ -1,6 +1,5 @@
 from flask import request
 from flask import Blueprint, session, request
-
 from forms import LoginForm
 from flask_login import current_user, login_user, logout_user, login_required
 from database import db
@@ -20,9 +19,6 @@ def authenticate():
 
 @auth_routes.route('/login', methods=['POST'])
 def login():
-    """
-    Logs a user in
-    """
     form = LoginForm()
     print(request.get_json())
     # Get the csrf_token from the request cookie and put it into the
