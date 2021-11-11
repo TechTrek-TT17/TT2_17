@@ -1,21 +1,28 @@
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 
-import React from 'react';
+import React, {useState} from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import ReactDOM from 'react-dom';
+import Login from './Pages/login';
+
 
 import { Home } from './Pages/Home';
 
 export const App = () => {
+	const [isAuthenticated, setIsAuthenticated] = useState(true);
+
 	return (
-		<Router>
-			{/* A <Switch> looks through its children <Route>s and renders the first one that matches the current URL. */}
-			<Switch>
-				<Route exact path="/" component={Home} />
-				<Route exact path="/home" component={Home} />
-			</Switch>
-		</Router>
+		<>
+		{isAuthenticated ? (
+			<Router setIsAuthenticated={setIsAuthenticated}>
+				{/* A <Switch> looks through its children <Route>s and renders the first one that matches the current URL. */}
+				<Switch>
+					<Route exact path="/" component={Home} />
+					<Route exact path="/home" component={Home} />
+				</Switch>
+			</Router>):(<Login setIsAuthenticated={setIsAuthenticated}/>)}
+		</>
 	);
 };
 
