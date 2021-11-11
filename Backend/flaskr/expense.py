@@ -4,8 +4,6 @@ import datetime
 
 # Function to update expense
 # data needed: id, expense_name, description, amount, user_name
-
-
 def update_expense_by_id(id):
     success = False
     data = request.get_json()
@@ -16,7 +14,7 @@ def update_expense_by_id(id):
 
         cur.execute("UPDATE expense SET name= ?, description= ?, amount=?, updated_by=?, updated_at=? WHERE id=?",
                     (data["name"], data["description"], data["amount"], data["updated_by"], datetime.datetime.now(),
-                     id,))
+                    id,))
         conn.commit()
         success = True
     except Exception as e:
@@ -32,8 +30,6 @@ def update_expense_by_id(id):
 
 # Function to delete expense
 # data needed: id
-
-
 def delete_expense_by_id(id):
     success = False
     try:
