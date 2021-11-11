@@ -47,7 +47,7 @@ def login():
         conn = connect_to_db()
         cur = conn.cursor()
 
-        user = cur.execute("Select * from db where username= ? and password= ?",
+        user = cur.execute("Select * from User where username= ? and password= ?",
                            data["username"], data["password"])
         conn.commit()
         success = True
