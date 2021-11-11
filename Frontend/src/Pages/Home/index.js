@@ -5,7 +5,7 @@ import Typography from '@mui/material/Typography';
 import ControlledAccordions from '../../components/Accordian';
 import { styled } from '@mui/material/styles';
 import Grid from '@mui/material/Grid';
-import MenuAppBar from '../../Components/Navbar';
+import MenuAppBar from '../../components/Navbar';
 import { ProjectData } from './constants';
 
 const CssHeader = styled(Typography)({

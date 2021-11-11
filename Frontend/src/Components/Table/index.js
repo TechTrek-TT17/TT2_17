@@ -9,15 +9,10 @@ import Paper from '@mui/material/Paper';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { styled } from '@mui/material/styles';
 
-function createData(name, description, amount, createdAt, createdBy, UpdatedAt, updatedBy) {
-  return { name, description, amount, createdAt, createdBy, UpdatedAt, updatedBy };
+function createData(name, description, amount, createdAt, createdBy, updatedAt, updatedBy) {
+  return { name, description, amount, createdAt, createdBy, updatedAt, updatedBy };
 }
 
-const rows = [
-  createData('Frozen yoghurt', 159, 6.0, 24, 4.0,5,5),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-  createData('Eclair', 262, 16.0, 24, 6.0),
-];
 
 const DeleteIconCustom = styled(DeleteIcon)({
     "&:hover": {
@@ -27,6 +22,14 @@ const DeleteIconCustom = styled(DeleteIcon)({
 });
 
 export default function BasicTable({data}) {
+
+  
+  rows = []
+  for (var i=0; i < data.length; i++){
+    line = createData(data[i].name, data[i].description,data[i].amount, data[i].createdAt, data[i].createdBy, data[i].updatedAt, data[i].updatedBy, data[i].updateBy)
+    rows.push(line)
+  }
+  
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
