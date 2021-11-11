@@ -35,7 +35,23 @@ function AuthProvider(props) {
 			});
 	}, [loggedIn]);
 
-	async function login() {}
+	async function login(username, password) {
+		// await axios.get('http://localhost:5000/user/login', {
+		// 	params: {
+		// 		username: username,
+		// 		password: password,
+		// }).then(function (response) {
+		// 		let data = response.data;
+		// 		if (response.status === 200) {
+
+		// 		let userDetails = data.userDetails;
+		// 		setUsername(data.userName);
+		// 		setName(userDetails.name);
+		// 		setUserRole(userDetails.role);
+		// 		// setAuthToken(JSON.stringify(data));
+		// 		setLoggedIn(true);
+		// 	}
+	}
 
 	const logout = () => {
 		// cookies.remove("connect.sid");
