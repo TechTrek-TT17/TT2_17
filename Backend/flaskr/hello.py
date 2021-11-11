@@ -1,5 +1,6 @@
 from flask import Flask
 from expense import *
+from projects import *
 
 
 app = Flask(__name__)
@@ -8,6 +9,13 @@ app = Flask(__name__)
 @app.route('/')
 def hello():
     return 'Hello, World!'
+
+
+# Projects Endpoints
+# GET projects
+@app.route('/projects', methods=['GET'])
+def get_projects():
+    return get_all_projects()
 
 
 # Expense Endpoints
