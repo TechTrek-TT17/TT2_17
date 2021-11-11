@@ -30,7 +30,7 @@ def get_all_projects():
         return Response(json.dumps({"status": "error"}), mimetype="application/json", status=500)
 
 
-def get_all_project_by_id(id):
+def get_all_project_by_id(user_id):
     success = False
     data = request.get_json()
     print(data)
@@ -38,7 +38,8 @@ def get_all_project_by_id(id):
         conn = connect_to_db()
         cur = conn.cursor()
 
-        projects = cur.execute("SELECT * from project where user.id = ?", id)
+        projects = cur.execute(
+            "SELECT * from project where user.id = ?", user_id)
         conn.commit()
         success = True
     except Exception as e:
