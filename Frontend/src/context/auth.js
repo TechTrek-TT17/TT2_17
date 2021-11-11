@@ -21,10 +21,9 @@ function AuthProvider(props) {
 			.get('http://localhost:5000/user/', { withCredentials: true })
 			.then(function (response) {
 				let data = response.data;
-				let userDetails = data.userDetails;
-				setUsername(data.userName);
-				setName(userDetails.name);
-				setUserRole(userDetails.role);
+				setUsername(data.username);
+				setName(data.name);
+				setUserRole(data.role);
 				// setAuthToken(JSON.stringify(data));
 				setLoggedIn(true);
 			})
@@ -36,21 +35,30 @@ function AuthProvider(props) {
 	}, [loggedIn]);
 
 	async function login(username, password) {
-		// await axios.get('http://localhost:5000/user/login', {
-		// 	params: {
-		// 		username: username,
-		// 		password: password,
-		// }).then(function (response) {
-		// 		let data = response.data;
-		// 		if (response.status === 200) {
-
-		// 		let userDetails = data.userDetails;
-		// 		setUsername(data.userName);
-		// 		setName(userDetails.name);
-		// 		setUserRole(userDetails.role);
-		// 		// setAuthToken(JSON.stringify(data));
-		// 		setLoggedIn(true);
-		// 	}
+		await axios
+			.get('http://localhost:5000/login', {
+				params: {
+					username: username,
+					password: password,
+				},
+			})
+			.then(function (response) {
+				let data = response.data;
+				if (response.status === 200) {
+					let userDetails = data.userDetails;
+					setUsername(data.username);
+					setName(data.name);
+					setUserRole(data.role);
+					// setAuthToken(JSON.stringify(data));
+					setLoggedIn(true);
+					return <Redirect to="/admin" />;
+				}
+			})
+			.catch(function (error) {
+				setLoggedIn(false);
+				alert('Login Failed');
+				return <Redirect to="/" />;
+			});
 	}
 
 	const logout = () => {

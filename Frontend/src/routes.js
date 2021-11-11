@@ -59,14 +59,14 @@ var routes = [
 	// 	component: Tables,
 	// 	layout: '/admin',
 	// },
-	// {
-	// 	path: '/login',
-	// 	name: 'Login',
-	// 	icon: VpnKey,
-	// 	iconColor: 'Info',
-	// 	component: Login,
-	// 	layout: '/auth',
-	// },
+	{
+		path: '/login',
+		name: 'Login',
+		icon: VpnKey,
+		iconColor: 'Info',
+		component: Login,
+		layout: '/auth',
+	},
 	// {
 	// 	path: '/register',
 	// 	name: 'Register',
