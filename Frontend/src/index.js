@@ -10,7 +10,7 @@ import Login from './Pages/login';
 import { Home } from './Pages/Home';
 
 export const App = () => {
-	const [isAuthenticated, setIsAuthenticated] = useState(false);
+	const [isAuthenticated, setIsAuthenticated] = useState(true);
 
 	return (
 		<>
