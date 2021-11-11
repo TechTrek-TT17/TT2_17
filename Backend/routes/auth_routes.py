@@ -3,7 +3,7 @@ from flask import Blueprint, session, request
 
 from forms import LoginForm
 from flask_login import current_user, login_user, logout_user, login_required
-from models import db
+from database import db
 
 auth_routes = Blueprint('auth', __name__)
 
