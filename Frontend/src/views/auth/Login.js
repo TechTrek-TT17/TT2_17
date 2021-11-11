@@ -33,9 +33,7 @@ function Login() {
 	const [password, setPassword] = React.useState('');
 
 	const signIn = () => {
-		alert(email);
-		alert(password);
-		login(email, password);
+		return login(email, password);
 	};
 
 	return (

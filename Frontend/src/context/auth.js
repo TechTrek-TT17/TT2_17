@@ -11,49 +11,53 @@ function AuthProvider(props) {
 	const [username, setUsername] = useState(null);
 	const [name, setName] = useState(null);
 	const [userRole, setUserRole] = useState(null);
+	const [userId, setUserId] = useState(null);
 	// const [authToken, setAuthToken] = useState(
 	// 	JSON.stringify(cookies.get('connect.sid'))
 	// );
 	const [loggedIn, setLoggedIn] = useState(false);
 
-	useEffect(async () => {
-		await axios
-			.get('http://localhost:5000/user/', { withCredentials: true })
-			.then(function (response) {
-				let data = response.data;
-				setUsername(data.username);
-				setName(data.name);
-				setUserRole(data.role);
-				// setAuthToken(JSON.stringify(data));
-				setLoggedIn(true);
-			})
-			.catch(function (error) {
-				setLoggedIn(false);
-				// alert("Not logged in");
-				// return <Redirect to="/" />;
-			});
-	}, [loggedIn]);
+	// useEffect(async () => {
+	// 	await axios
+	// 		.get('http://localhost:5000/login/', { withCredentials: true })
+	// 		.then(function (response) {
+	// 			let data = response.data;
+	// 			setUsername(data.username);
+	// 			setName(data.name);
+	// 			setUserRole(data.role);
+	// 			// setAuthToken(JSON.stringify(data));
+	// 			setLoggedIn(true);
+	// 		})
+	// 		.catch(function (error) {
+	// 			setLoggedIn(false);
+	// 			// alert("Not logged in");
+	// 			// return <Redirect to="/" />;
+	// 		});
+	// }, [loggedIn]);
 
 	async function login(username, password) {
 		// setUsername('user1');
 		// setName('Name');
 		// setUserRole('Role1');
+		let data = {
+			username: username,
+			password: password,
+		};
 		await axios
-			.get('http://localhost:5000/login', {
-				params: {
-					username: username,
-					password: password,
-				},
+			.post('http://localhost:5000/login', data, {
+				headers: { 'Content-Type': 'application/json' },
 			})
 			.then(function (response) {
 				let data = response.data;
 				if (response.status === 200) {
-					setUsername(data.username);
-					setName(data.name);
-					setUserRole(data.role);
+					console.log(data);
+					setUsername(data[1]);
+					setName(data[3]);
+					setUserRole(data[-1]);
+					setUserId(data[0]);
 					// setAuthToken(JSON.stringify(data));
 					setLoggedIn(true);
-					return <Redirect to="/admin" />;
+					window.location.href = '/';
 				}
 			})
 			.catch(function (error) {

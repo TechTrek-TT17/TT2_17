@@ -3,8 +3,8 @@ import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
 import { AuthProvider } from './context/auth';
 import PrivateRoute from './routes/PrivateRoute';
 
-import Login from './Pages/login';
-import { Home } from './Pages/Home';
+// import Login from './Pages/login';
+// import { Home } from './Pages/Home';
 import AdminLayout from 'layouts/Admin.js';
 import AuthLayout from 'layouts/Auth.js';
 

@@ -1,12 +1,14 @@
 from flask import Flask
 from flask_login import login_user, logout_user, login_required
-from flask_cors import CORS
+from flask_cors import CORS, cross_origin
 from expense import *
 from projects import *
+from db import connect_to_db
 
 
 app = Flask(__name__)
 CORS(app)
+app.config['CORS_HEADERS'] = 'Content-Type'
 
 # Projects Endpoints
 # GET projects
@@ -18,10 +20,10 @@ def get_projects():
     return get_all_projects()
 
 
-@login_required
+# @login_required
 @app.route('/projects/<id>', methods=['GET'])
 def get_all_project_by_id(id):
-    return get_all_project_by_id()
+    return get_all_project_by_id(id)
 
 
 # Expense Endpoints
@@ -38,18 +40,22 @@ def delete_expense(id):
 
 
 @login_required
-@app.route("/", methods=["GET", "POST"])
+@cross_origin
+# @app.route("/", methods=["GET", "POST"])
 @app.route("/login", methods=["GET", "POST"])
 def login():
     success = False
     data = request.get_json()
+    print(request.data)
     try:
         conn = connect_to_db()
         cur = conn.cursor()
 
-        user = cur.execute("Select * from User where username= ? and password= ?",
-                           data["username"], data["password"]).fetchAll().first()
+        cur.execute("Select * from user where username= ? and password= ?",
+                    (data["username"], data["password"]))
+        user = cur.fetchone()
         conn.commit()
+        print(user)
         success = True
     except Exception as e:
         print(e)
@@ -58,7 +64,8 @@ def login():
         conn.close()
 
     if (success):
-        login_user(user)
+
+        # login_user(user[0])
         return Response(json.dumps(user), mimetype="application/json", status=200)
 
     else:
