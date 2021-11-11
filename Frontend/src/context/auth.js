@@ -35,6 +35,9 @@ function AuthProvider(props) {
 	}, [loggedIn]);
 
 	async function login(username, password) {
+		// setUsername('user1');
+		// setName('Name');
+		// setUserRole('Role1');
 		await axios
 			.get('http://localhost:5000/login', {
 				params: {
@@ -45,7 +48,6 @@ function AuthProvider(props) {
 			.then(function (response) {
 				let data = response.data;
 				if (response.status === 200) {
-					let userDetails = data.userDetails;
 					setUsername(data.username);
 					setName(data.name);
 					setUserRole(data.role);
