@@ -14,7 +14,7 @@ def update_expense_by_id(id):
 
         cur.execute("UPDATE expense SET name= ?, description= ?, amount=?, updated_by=?, updated_at=? WHERE id=?",
                     (data["name"], data["description"], data["amount"], data["updated_by"], datetime.datetime.now(),
-                     id,))
+                    id,))
         conn.commit()
         success = True
     except Exception as e:
