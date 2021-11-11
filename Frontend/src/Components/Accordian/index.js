@@ -4,7 +4,7 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import BasicTable from '../../Components/Table';
+import BasicTable from '../Table';
 import AddIcon from '@mui/icons-material/Add';
 import Button from '@mui/material/Button';
 import { Grid } from '@mui/material';

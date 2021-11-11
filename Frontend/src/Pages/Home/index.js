@@ -2,7 +2,7 @@ import { useState, useLayoutEffect } from 'react';
 
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import ControlledAccordions from '../../Components/Accordian';
+import ControlledAccordions from '../../components/Accordian';
 import { styled } from '@mui/material/styles';
 import Grid from '@mui/material/Grid';
 import MenuAppBar from '../../Components/Navbar';
