@@ -39,7 +39,7 @@ def get_all_project_by_id(user_id):
         cur = conn.cursor()
 
         projects = cur.execute(
-            "SELECT * from Project where user_id = ?", user_id)
+            "SELECT * from Project where user_id = ?", user_id).fetchAll().first()
         conn.commit()
         success = True
     except Exception as e:

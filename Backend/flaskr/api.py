@@ -48,7 +48,7 @@ def login():
         cur = conn.cursor()
 
         user = cur.execute("Select * from User where username= ? and password= ?",
-                           data["username"], data["password"])
+                           data["username"], data["password"]).fetchAll().first()
         conn.commit()
         success = True
     except Exception as e:
