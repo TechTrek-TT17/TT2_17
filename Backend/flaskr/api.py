@@ -21,27 +21,7 @@ def get_projects():
 @login_required
 @app.route('/projects/<id>', method=['GET'])
 def get_all_project_by_id(id):
-    success = False
-    data = request.get_json()
-    print(data)
-    try:
-        conn = connect_to_db()
-        cur = conn.cursor()
-
-        projects = cur.execute("SELECT * from project where user.id = ?", id)
-        conn.commit()
-        success = True
-    except Exception as e:
-        print(e)
-        conn.rollback()
-    finally:
-        conn.close()
-
-    if (success):
-
-        return Response(json.dumps(projects), mimetype="application/json", status=200)
-    else:
-        return Response(json.dumps({"status": "error"}), mimetype="application/json", status=500)
+    return get_all_project_by_id()
 
 
 # Expense Endpoints
