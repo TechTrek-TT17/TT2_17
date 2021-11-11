@@ -5,8 +5,7 @@ import Typography from '@mui/material/Typography';
 import ControlledAccordions from '../../Components/Accordian';
 import { styled } from '@mui/material/styles';
 import Grid from '@mui/material/Grid';
-
-
+import MenuAppBar from '../../Components/Navbar';
 
 const CssHeader = styled(Typography)({
 	fontWeight: '700',
@@ -16,18 +15,12 @@ const CssHeader = styled(Typography)({
 export const Home = () => {
 
   return (
-    <Box sx={{ bgcolor: '#FCFBFB', padding: '80px' }}>
-		<Grid container sx={{display: "flex", alignItems: "center"}}>
-			<Grid item xs={10}>
-				<CssHeader variant="h4">Budget Management System</CssHeader>
-
-			</Grid>
-			<Grid item xs={2}>
-				
-			</Grid>
-			
+    <Box sx={{ bgcolor: '#FCFBFB', height: "100vh" }}>
+		<MenuAppBar />
+		<Grid container sx={{display: "flex", alignItems: "center", padding: '80px'}}>
+			<CssHeader variant="h4">Welcome Back</CssHeader>
+      		<ControlledAccordions />
 		</Grid>
-      	<ControlledAccordions />
     </Box>
   );
 }
